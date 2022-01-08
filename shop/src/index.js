@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import ReviewJs from './pages/reviewJs';
+import DemoMeterial from './pages/DemoMeterial';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <ReviewJs/>
+    <App />
+    {/* <DemoMeterial/> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -90,6 +90,60 @@ const JSReview =  () => {
       console.log(item)
     })
     //filter, find, some
+    // es6 template
+    // const abc = 'let hong son'
+    // const html = `rennder html ${abc}`
+    const product = {
+      name: 'abc',
+      price: 2000,
+      color: 'white'
+    }
+    // c1 key
+    console.log(product?.name)
+    console.log(product['name'])
+    //rest object
+    const {name, ...rest} = product
+    console.log('name',name)
+    console.log('rest', rest)
+    // clone object unmute 
+    const product2 = Object.assign({}, product)
+    const product3 =  {...product}
+    delete product3.name
+    // promise
+    const promiseFc = (a, b) => {
+      return new Promise((resolve, reject) =>{
+         if(a+b > 4) {
+          resolve(a+b)
+         } else {
+          reject(null)
+         }
+      })
+    }
+    // arow 
+    const functWait = async () => {
+      const response = await fetch('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article').catch(err => {
+        console.log('error', err);
+      })
+      console.log('response', response)
+    }
+    // promiseFc(1,5).then(result => {
+    //   console.log('result', result)
+    // })
+  //  fetch('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article').then(response => {
+  //    console.log('response',response)
+  //  }).catch(err => {
+  //    console.error(err)
+  //  })
+  // localstorage
+  const userName = {
+    'name': 'admin',
+    'role': 1
+  }
+  localStorage.setItem('USER', JSON.stringify(userName))
+ const value =  localStorage.getItem('USER')
+ console.log(JSON.parse(value).name)
+
+  functWait()
   return (
     <h1></h1>
   )

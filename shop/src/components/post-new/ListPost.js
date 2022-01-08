@@ -2,21 +2,21 @@
 import React from 'react';
 import Post from './Post'
 import styled from 'styled-components'
-const SWrapper = styled.div`
-  display: flex;
-  just-align: center;
-  margin: 0 auto;
-  flex-wrap: wrap
-`
+import Grid from '@mui/material/Grid'
+
 const ListPost = ({posts, onRemove, onEdit}) => {
   return (
-    <SWrapper>
+    <Grid container xs={{
+      gap: 1
+    }}>
       {posts&&posts.length&&posts.map((item, index) => {
           return (
-            <Post onRemove={onRemove} onEdit={onEdit} key={index} {...item}/>
+            <Grid item xs={6}>
+              <Post  key={index} {...item}/>
+            </Grid>
           )
         })}
-    </SWrapper>
+    </Grid>
   )
 }
 

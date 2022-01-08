@@ -1,6 +1,5 @@
 
 import React from 'react';
-import './style.scss';
 class Profile extends React.PureComponent  {
   constructor(props) {
     super(props)
