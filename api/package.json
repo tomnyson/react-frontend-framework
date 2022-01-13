@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
+  "proxy": "localhost:8085",
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
@@ -33,6 +34,7 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "mysql": "^2.18.1",
     "passport": "^0.5.2",

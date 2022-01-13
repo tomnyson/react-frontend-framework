@@ -11,7 +11,7 @@ import {
 import { UsersService } from './users.service';
 import { UsersDTO, CreateUserDto } from './users.dto';
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
   constructor(private usersService: UsersService) { }
 
@@ -24,6 +24,7 @@ export class UsersController {
       users
     };
   }
+
   @Post()
   async createUsers(@Body() data: CreateUserDto) {
     const user = await this.usersService.create(data);

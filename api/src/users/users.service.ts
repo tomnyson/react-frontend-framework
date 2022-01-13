@@ -24,13 +24,8 @@ export class UsersService {
 
   async create(data: CreateUserDto) {
     const user = this.usersRepository.create(data);
-    console.log('data.roleId)', data.roleId)
     const role = await this.rolesService.findOne(data.roleId);
-    // console.log('role', role)
-    const passwordInPlaintext = '12345678';
-    const hash = await bcrypt.hash(passwordInPlaintext, 10);
-    console.log('hash', hash);
-    // data.role = role;
+    const hash = await bcrypt.hash(data.password, 10);
     delete data.roleId;
     const newUser = await this.usersRepository.create({
       ...data,

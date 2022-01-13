@@ -5,6 +5,10 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box';
 
 const Post = ({picture, name,description, id, createdAt, onRemove, onEdit}) => {
+
+  const onHandleEdit = (item) => {
+    onEdit(item)
+  }
   return (
     <Grid style={{display: 'flex'}}>
       <Grid item xs={6}>
@@ -18,6 +22,9 @@ const Post = ({picture, name,description, id, createdAt, onRemove, onEdit}) => {
         <h3>{name}</h3>
         <span style={{fontSize: '10px', color: 'gray'}}>{createdAt}</span>
         <p>{description}</p>
+        <button onClick={() => onHandleEdit({
+          picture, name,description, id
+        })}>EDIT</button>
       </Grid>
     </Grid>
   )

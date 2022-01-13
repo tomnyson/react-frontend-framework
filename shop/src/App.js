@@ -9,8 +9,10 @@ import List from './pages/class';
 import axios from 'axios';
 import ListPost from './components/post-new/ListPost'
 import CreatePost from './components/post-new/CreatePost'
+import UpdatePost from './components/post-new/UpdatePost'
 import styled from 'styled-components'
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
 
 function App() {
   //useState khai báo đây là state( state có nghỉa là một biến có thể thay đổi trong quá trình chạy)
@@ -30,7 +32,9 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [isFetchData, setIsFetchData] = useState(false)
   const [isCreate, setIsCreate] = useState(false)
-  const [postSelected, setPostSelected] = useState(null)
+
+  const [selectedPost, setSelectedPost] = useState(undefined)
+
   //start->(thay đổi tráng thái được)-> remove
    useEffect(()=> {
     fetchAPI()
@@ -88,20 +92,34 @@ function App() {
     }
     setIsFetchData(!isFetchData)
   }
-  const onEdit = async( post) => {
-      console.log('post', post)
-      setPostSelected(post)
-      setIsCreate(true)
+  const onEdit = async(post) => {
+    setSelectedPost(post)
   }
+  
   const onChangeName = (event) => {
     setName(event.target.value)
   }
-  const UserName = {
-    'name': 'John',
-    old: 20
+
+  const onSubmit = async (data) => {
+    // POST
+    const response = await axios.post('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article', data)
+    if(response && response.status === 201) {
+      alert('create thành công')
+      fetchAPI()
+    }
   }
+
+  const onSubmitEdit = async (data) => {
+    const response = await axios.put(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${data.id}`, data)
+    if(response && response.status === 200) {
+      alert('cập nhật thành công')
+      setSelectedPost(undefined)
+      fetchAPI()
+    }
+  }
+
   return (
-    <Grid container>
+    <Container>
       {/* <Grid item> */}
         {/* <Context.Provider value={UserName}> */}
         {/* <input onChange={onChangeName}  type="text" name="name" placeholder="nhập tên"/> */}
@@ -109,15 +127,16 @@ function App() {
         {isCreate && <CreatePost post={postSelected}  onSubmit={onCreate}/>}
         <hr/> */}
         {/* <SSearchInput type="text" placeholder="search buy keyword"/> */}
-          <CreatePost/>
-          <ListPost posts={data}/>
+            <CreatePost onSubmit={onSubmit}/>
+            {selectedPost && <UpdatePost item={selectedPost} onSubmit={onSubmitEdit}/>}
+            <ListPost onEdit={onEdit} posts={data}/>
         {/* <ListPost onRemove={onRemove} onEdit={onEdit} posts={data.sort((a,b) => {
           return new Date(b.createdAt) - new Date(a.createdAt)
         })}/> */}
         {/* <TestContextB/> */}
         {/* </Context.Provider> */}
         {/* </Grid> */}
-    </Grid>
+    </Container>
   );
 }
 const SButton = styled.button`

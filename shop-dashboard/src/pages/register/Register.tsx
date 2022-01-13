@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -5,24 +6,29 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { schemaLogin } from '../../utils/schema';
+import { RootState } from '../../redux/store';
 import { useDispatch } from 'react-redux';
-import { loginAccount } from '../../redux/slices/user.slide';
-import { TLogin } from '../../utils/types/user.type';
+import { registerAccount } from '../../redux/slices/user.slide';
+import { schemaRegister } from '../../utils/schema';
 
-const LoginScreen = () => {
+type TUser = {
+  username: string;
+  password: string;
+  email: string;
+  password_confirm: string;
+};
+
+const RegisterScreen = () => {
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(schemaLogin)
+    resolver: yupResolver(schemaRegister)
   });
   const dispatch = useDispatch();
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  const onSubmit = (user: TLogin) => {
-    console.log({ user });
-    dispatch(loginAccount(user));
+  const onSubmit = (user: TUser) => {
+    dispatch(registerAccount(user));
   };
 
   return (
@@ -59,7 +65,7 @@ const LoginScreen = () => {
             color: '#e0e0e0',
             textAlign: 'center'
           }}>
-          Login to admin
+          Register new account
         </Box>
         <Box
           component="form"
@@ -69,21 +75,39 @@ const LoginScreen = () => {
           autoComplete="off">
           <p>Username</p>
           <TextField
-            error={errors && errors.email?.message}
+            error={errors && errors.username?.message}
             fullWidth
             id="outlined-required"
             placeholder="Enter username"
+            helperText={errors.username?.message}
+            {...register('username')}
+          />
+          <p>Email</p>
+          <TextField
+            error={errors && errors.email?.message}
+            fullWidth
+            id="outlined-required"
+            placeholder="Enter email"
             helperText={errors.email?.message}
             {...register('email')}
           />
-          <p>Password</p>
+          <p>password</p>
           <TextField
             error={errors && errors.password?.message}
-            defaultValue="Hello World"
+            fullWidth
+            type="password"
+            id="outlined-required"
+            placeholder="Enter password"
             helperText={errors.password?.message}
+            {...register('password')}
+          />
+          <p>Password confirm</p>
+          <TextField
+            error={errors && errors.password_confirm?.message}
+            helperText={errors.password_confirm?.message}
             type="password"
             fullWidth
-            {...register('password', { required: true })}
+            {...register('password_confirm', { required: true })}
           />
           <Button
             type="submit"
@@ -92,12 +116,12 @@ const LoginScreen = () => {
             }}
             fullWidth
             variant="contained">
-            Login
+            Register
           </Button>
           <Box component="p">
             {' '}
-            {`don't have any account?`}
-            <SNavigation to="/register">Register as Shop Owner</SNavigation>
+            {`Already have an account?`}
+            <SNavigation to="/login">Login</SNavigation>
           </Box>
         </Box>
       </Box>
@@ -110,4 +134,4 @@ const SNavigation = styled(Link)`
   color: rgb(0, 159, 127);
   font-weight: bold;
 `;
-export default LoginScreen;
+export default RegisterScreen;

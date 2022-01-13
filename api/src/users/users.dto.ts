@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, Length, IsString, IsInt } from 'class-validator';
 import { RolesEntity } from '../roles/entities/role.entity';
 export interface UsersDTO {
   id: number;
-  name: string;
+  username?: string;
   email: string;
   password: string;
 }
@@ -13,7 +13,7 @@ export class CreateUserDto {
 
   @Length(3, 10)
   @IsString()
-  name: string;
+  username: string;
 
   @IsNotEmpty()
   password: string;
