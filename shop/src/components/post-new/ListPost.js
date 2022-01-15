@@ -1,7 +1,6 @@
 
 import React from 'react';
 import Post from './Post'
-import styled from 'styled-components'
 import Grid from '@mui/material/Grid'
 
 const ListPost = ({posts, onRemove, onEdit}) => {

@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "prettier"
+    ],
+    "react/jsx-uses-vars": "warn",
+    "react/jsx-uses-react": "warn",
+    "no-unused-vars": "off"
+  }
+}

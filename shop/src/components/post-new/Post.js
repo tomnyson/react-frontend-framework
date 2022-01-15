@@ -1,12 +1,11 @@
 
 import React from 'react';
-import styled from 'styled-components'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-
+import {Link} from 'react-router-dom'
 const Post = ({picture, name,description, id, createdAt, onRemove, onEdit}) => {
   const onHandleEdit = (item) => {
     onEdit(item)
@@ -30,6 +29,7 @@ const Post = ({picture, name,description, id, createdAt, onRemove, onEdit}) => {
         <IconButton onClick={() => onHandleEdit({
           picture, name,description, id
         })}><DeleteOutlineOutlinedIcon/></IconButton>
+        <Link to={`/post/${id}`}>View Detail</Link>
       </Grid>
     </Grid>
   )
