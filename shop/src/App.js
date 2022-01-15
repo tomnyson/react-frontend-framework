@@ -1,11 +1,6 @@
 import React, {useState, useEffect}  from 'react';
 import './App.css';
-import { Context } from './context/context';
 // import componet trước khi sử dụng
-import Profile from './components/Profile';
-import TestContextA from './components/TestContextA';
-import TestContextB from './components/TestContextB';
-import List from './pages/class';
 import axios from 'axios';
 import ListPost from './components/post-new/ListPost'
 import CreatePost from './components/post-new/CreatePost'
@@ -80,17 +75,9 @@ function App() {
    if(response && response.status === 201) {
      alert('tạo thành công')
    }
-    }
     setIsCreate(false)
     setIsFetchData(!isFetchData)
-  }
-  const onRemove = async (id) => {
-    const response = await axios.delete(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${id}`,
-    )
-    if(response && response.status === 200) {
-      alert('xoá thành công')
     }
-    setIsFetchData(!isFetchData)
   }
   const onEdit = async(post) => {
     setSelectedPost(post)
@@ -100,6 +87,9 @@ function App() {
     setName(event.target.value)
   }
 
+  const onRemovePost = (id) => {
+    console.log('onRemovePost', id)
+  }
   const onSubmit = async (data) => {
     // POST
     const response = await axios.post('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article', data)
@@ -120,22 +110,11 @@ function App() {
 
   return (
     <Container>
-      {/* <Grid item> */}
-        {/* <Context.Provider value={UserName}> */}
-        {/* <input onChange={onChangeName}  type="text" name="name" placeholder="nhập tên"/> */}
-        {/* <SButton onClick={()=>setIsCreate(!isCreate)}>Create Post</SButton>
-        {isCreate && <CreatePost post={postSelected}  onSubmit={onCreate}/>}
-        <hr/> */}
-        {/* <SSearchInput type="text" placeholder="search buy keyword"/> */}
             <CreatePost onSubmit={onSubmit}/>
             {selectedPost && <UpdatePost item={selectedPost} onSubmit={onSubmitEdit}/>}
-            <ListPost onEdit={onEdit} posts={data}/>
-        {/* <ListPost onRemove={onRemove} onEdit={onEdit} posts={data.sort((a,b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt)
-        })}/> */}
-        {/* <TestContextB/> */}
-        {/* </Context.Provider> */}
-        {/* </Grid> */}
+            <ListPost onEdit={onEdit}
+             onRemovePost={onRemovePost} 
+             posts={data}/>
     </Container>
   );
 }

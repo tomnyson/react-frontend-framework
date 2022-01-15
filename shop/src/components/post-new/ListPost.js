@@ -10,8 +10,8 @@ const ListPost = ({posts, onRemove, onEdit}) => {
     }}>
       {posts&&posts.length&&posts.map((item, index) => {
           return (
-            <Grid item xs={6}>
-              <Post  key={index} onEdit={onEdit} {...item}/>
+            <Grid key={index} item xs={6}>
+              <Post  onRemove={onRemove} onEdit={onEdit} {...item}/>
             </Grid>
           )
         })}

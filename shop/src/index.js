@@ -5,7 +5,7 @@ import App from './App';
 import ReviewJs from './pages/reviewJs';
 import DemoMeterial from './pages/DemoMeterial';
 import reportWebVitals from './reportWebVitals';
-import RouterScreen from './routes/public.route';
+import RouterScreen from './routes';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}

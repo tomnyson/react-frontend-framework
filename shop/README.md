@@ -1,70 +1,217 @@
-# Getting Started with Create React App
+import React from 'react';
+import {BrowserRouter as Router,  Routes,  Route} from 'react-router-dom'
+import DemoMeterial from '../pages/DemoMeterial'
+import PostScreen from '../pages/PostScreen'
+import PostDetailScreen from '../pages/PostDetailScreen'
+import Grid from '@mui/material/Grid'
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+const RouterScreen = () => {
+    return (
+      <Router>
+      <Grid container spacing={2} sx={{margin: '0 auto'}}>
+      <Grid item md={12}>
+          <Routes>
+            <Route path="/post" element={<PostScreen/>}/>
+            <Route path="/post/:id" element={<PostDetailScreen/>}/>
+            <Route path="/" element={<DemoMeterial/>}/>
+          </Routes>
+      </Grid>
+        
+      </Grid>
+      </Router>
+    )
+}
 
-## Available Scripts
+export default RouterScreen
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+import React, {useState, useEffect}  from 'react';
+import axios from 'axios';
+import ListPost from '../components/post-new/ListPost'
+import CreatePost from '../components/post-new/CreatePost'
+import UpdatePost from '../components/post-new/UpdatePost'
+import styled from 'styled-components'
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+function PostScreen() {
+  //useState khai báo đây là state( state có nghỉa là một biến có thể thay đổi trong quá trình chạy)
+  // trạng thái của component
+  /**
+   * b1: tên biến , vd: name  => setName
+   *  định nghĩa một hàm để setSate default: LE HONG SOn
+   *  nếu muốn xài mặc định thì bỏ dữ liệu vào useSate()
+   * để dùng đơn giản chỉ cần gọi tên liệu
+   * cần cập nhật gọi hàm set ở trên
+   * variable : nhập bất kỳ thứ gì: kiểu dữ liệu cơ bản string, number, boolean
+   *  kiểu nâng cao: object
+   */
+  const [name, setName] = useState('Le Hong Son')
+  const [mssv, setMssv] = useState('')
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [isFetchData, setIsFetchData] = useState(false)
+  const [isCreate, setIsCreate] = useState(false)
 
-### `npm test`
+  const [selectedPost, setSelectedPost] = useState(undefined)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   useEffect(()=> {
+    fetchAPI()
+  },[isFetchData])
 
-### `npm run build`
+  const fetchAPI= async () => {
+    const response = await axios.get('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article');
+    // check dữ dữ liệu trước khi lấy
+    if(response && response.status === 200) {
+      setData(response.data)
+    }
+  }
+  const onCreate = async (post) => {  
+    if(post&&post.id) {
+      // case update
+      const response = await axios.put(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${post.id}`,
+      post
+    ) 
+    console.log('response',response)
+    if(response && response.status === 200) {
+      alert('cập nhật thành công')
+    }
+    } else {
+      const response = await axios.post(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article`,
+      post
+   ) 
+   if(response && response.status === 201) {
+     alert('tạo thành công')
+   }
+    }
+    setIsCreate(false)
+    setIsFetchData(!isFetchData)
+  }
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  const onEdit = async(post) => {
+    setSelectedPost(post)
+  }
+  
+  const onChangeName = (event) => {
+    setName(event.target.value)
+  }
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  const onSubmit = async (data) => {
+    // POST
+    const response = await axios.post('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article', data)
+    if(response && response.status === 201) {
+      alert('create thành công')
+      fetchAPI()
+    }
+  }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  const onSubmitEdit = async (data) => {
+    const response = await axios.put(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${data.id}`, data)
+    if(response && response.status === 200) {
+      alert('cập nhật thành công')
+      setSelectedPost(undefined)
+      fetchAPI()
+    }
+  }
 
-### `npm run eject`
+  const onRemove = async (id) => {
+   const response = await axios.delete(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${id}`)
+    if(response && response.status === 200) {
+      alert('xoá thành công')
+      // load lại list
+      fetchAPI()
+    }
+  }
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  return (
+          <>
+              <CreatePost onSubmit={onSubmit}/>
+              {selectedPost && <UpdatePost item={selectedPost} onSubmit={onSubmitEdit}/>}
+              <ListPost onRemove={onRemove} onEdit={onEdit} posts={data}/>
+            </>
+        );
+}
+const SButton = styled.button`
+  background: green;
+  color: #ffff;
+  padding: 10px;
+  width: 150px;
+`
+const SSearchInput = styled.input`
+  padding: 10px;
+  width: 300px;
+  margin-bottom: 20px;
+`
+const Scontainer = styled.div `
+  max-width: 1240px;
+  margin: 0 auto;
+`
+export default PostScreen;
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getAPI } from '../utils/api';
+import { API } from '../utils/const';
+import styled from 'styled-components';
+import Grid from '@mui/material/Grid';
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+function PostDetailScreen() {
+  const [post, setPost] = useState(null);
+  const { id } = useParams();
 
-## Learn More
+  useEffect(async () => {
+    if (id) {
+      const url = API + `/${id}`;
+      const response = await getAPI(url);
+      if (response) {
+        setPost(response);
+      }
+    }
+  }, [id]);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  if (!post) {
+    return <h1>Loading</h1>;
+  }
+  const { name, description, picture, createdAt } = post;
+  return (
+    <Grid>
+      <SPost>
+        <img alt="" src={picture} />
+        <SWrapperContent>
+          <h3>{name}</h3>
+          <span style={{ fontSize: '10px', color: 'gray' }}>{createdAt}</span>
+          <p>{description}</p>
+          <SReadMore href="#">read more</SReadMore>
+        </SWrapperContent>
+        <div></div>
+      </SPost>
+    </Grid>
+  );
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+const SPost = styled.div`
+  display: flex;
+  width: 49%;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  img {
+    width: 300px;
+    object-fit: contain;
+  }
+`;
+const SWrapperContent = styled.div`
+  text-align: left;
+  padding-left: 20px;
+  h3 {
+    margin: 0;
+  }
+`;
+const SReadMore = styled.a`
+  text-decoration: none;
+  :hover {
+    text-decoration: underline;
+    color: red;
+  }
+`;
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+export default PostDetailScreen;
