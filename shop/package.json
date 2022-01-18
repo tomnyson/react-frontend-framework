@@ -26,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "db": "set PORT=3001 && json-server --watch db.json",
-    "dev": "concurrently --kill-others \"npm run start\" \"npm run db\""
+    "dev": "concurrently --kill-others \"npm run start\" \"npm run db\"",
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,8 @@
     ]
   },
   "devDependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "eslint": "^8.6.0",
+    "eslint-plugin-react": "^7.28.0"
   }
 }

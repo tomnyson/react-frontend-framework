@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "demo post",
+      "tag": "new, love",
+      "categoryId": 1       
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "dev"
+    }
+  ]
+}
