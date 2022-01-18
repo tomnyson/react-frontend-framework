@@ -6,18 +6,10 @@ import ReviewJs from "./pages/reviewJs"
 import DemoMeterial from "./pages/DemoMeterial"
 import reportWebVitals from "./reportWebVitals"
 import RouterScreen from "./routes"
-import Provider from "./context/todoProvider"
-import AddTodo from "./components/todo/AddToDo"
-import ToDoList from "./components/todo/ToDoList"
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    {/* <RouterScreen /> */}
-    <Provider>
-      <AddTodo />
-      <ToDoList />
-    </Provider>
+    <RouterScreen />
   </React.StrictMode>,
   document.getElementById("root")
 )

@@ -2,13 +2,12 @@ import React, { useState, useEffect, useContext } from "react"
 import { getAPI, putAPI, deleteAPI } from "../utils/api"
 import { API } from "../utils/const"
 import ListPost from "../components/post-new/ListPost"
-import { ThemeContext } from "../context/themContext"
+import { ThemeContext } from "../context/themeContext"
 import styled from "styled-components"
 
 const PostScreen = () => {
   const [data, setData] = useState([])
-  const { value, setValue } = useContext(ThemeContext)
-  console.log("value", value)
+  // const { value, setValue } = useContext(ThemeContext)
   useEffect(() => {
     fetchAPI()
   }, [])
@@ -38,15 +37,15 @@ const PostScreen = () => {
       fetchAPI()
     }
   }
-  const oneChangeTheme = () => {
-    setValue({ ...value, darkMode: !value.darkMode })
-  }
+  // const oneChangeTheme = () => {
+  //   setValue({ ...value, darkMode: !value.darkMode })
+  // }
 
   const SWrapper = styled.div``
 
   return (
     <SWrapper>
-      <button onClick={oneChangeTheme}>dark mode</button>
+      {/* <button onClick={oneChangeTheme}>dark mode</button> */}
       <ListPost posts={data} onEdit={onSubmitEdit} onRemovePost={onRemove} />
     </SWrapper>
   )

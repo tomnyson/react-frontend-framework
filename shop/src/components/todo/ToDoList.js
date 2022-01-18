@@ -1,23 +1,23 @@
 import React from "react"
-import TodoListContext from "../../context/todoContext"
-
+import { useGlobalContext } from "../../context/globalContext"
 const TodoList = () => {
-  const { todoList, removeTodoItem, markAsCompleted } =
-    React.useContext(TodoListContext)
+  const [state] = useGlobalContext()
+  console.log("state", state)
   return (
     <ul>
-      {todoList.map((todoItem) => (
-        <li
-          className={`todoItem ${todoItem.completed ? "completed" : ""}`}
-          key={todoItem.id}
-          onClick={() => markAsCompleted(todoItem.id)}
-        >
-          {todoItem.label}
-          <button className="delete" onClick={() => removeTodoItem(todoItem.id)}>
+      {state &&
+        state.todo.todoList.map((todoItem) => (
+          <li
+            className={`todoItem ${todoItem.completed ? "completed" : ""}`}
+            key={todoItem.id}
+            // onClick={() => markAsCompleted(todoItem.id)}
+          >
+            {todoItem}
+            {/* <button className="delete" onClick={() => removeTodoItem(todoItem.id)}>
             X
-          </button>
-        </li>
-      ))}
+          </button> */}
+          </li>
+        ))}
     </ul>
   )
 }

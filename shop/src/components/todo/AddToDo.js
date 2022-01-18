@@ -1,10 +1,10 @@
-import React from "react"
-import TodoListContext from "../../context/todoContext"
-
+import React, { useState } from "react"
+import { useGlobalContext } from "../../context/globalContext"
+import { actions, addToDo } from "../../reducer/action"
 const AddTodo = () => {
-  const [inputValue, setInputValue] = React.useState("")
-  const { addTodoItem } = React.useContext(TodoListContext)
-
+  const [inputValue, setInputValue] = useState("")
+  const [state, dispatch] = useGlobalContext()
+  console.log("state", state)
   return (
     <>
       <input
@@ -15,7 +15,7 @@ const AddTodo = () => {
       />
       <button
         onClick={() => {
-          addTodoItem(inputValue)
+          dispatch(addToDo({ label: inputValue }))
           setInputValue("")
         }}
       >
