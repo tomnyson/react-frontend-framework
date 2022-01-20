@@ -1,7 +1,6 @@
 import { actions } from "./action"
 
 export const todoReducer = (state, { type, payload }) => {
-  console.log("state todoReducer", payload.label)
   switch (type) {
     case actions.ADD_TODO_ITEM:
       return {
