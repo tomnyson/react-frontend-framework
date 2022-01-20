@@ -7,10 +7,16 @@ export const cartReducer = (state, action) => {
       const { id } = action.payload
       const index = state.cart.findIndex((product) => product.id === id)
       if (index !== -1) {
-        //update
+        const cloneCartNew = state.cart.slice()
+        const currentItem = cloneCartNew[index]
+        currentItem.quantity = currentItem.quantity + 1
+        cloneCartNew[index] = currentItem
+        return {
+          ...state,
+          cart: cloneCartNew,
+        }
       }
       // theme
-      // update
       const cloneCartNew = state.cart.slice()
       cloneCartNew.push(action.payload)
       return {
