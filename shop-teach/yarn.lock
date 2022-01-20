@@ -9954,6 +9954,11 @@ url-parse-lax@^3.0.0:
   dependencies:
     prepend-http "^2.0.0"
 
+use-reducer-logger@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/use-reducer-logger/-/use-reducer-logger-1.0.2.tgz#84b3531ebf269841b9c082fcbf154cb12516922e"
+  integrity sha512-i0SQtRrWqbgQ07V0Ty1Eznh9k37LCTp3eaSIAMLTdd6+mg3teREHMf10lk9cf5OzzT+woP0XS8E1FC4+hxcrJQ==
+
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
