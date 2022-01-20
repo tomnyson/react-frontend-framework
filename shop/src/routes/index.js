@@ -54,7 +54,7 @@ const RouterScreen = () => {
   const publicPath = [
     {
       path: "/",
-      page: <PostScreen />,
+      page: <ProductScreen />,
     },
     {
       path: "/posts",

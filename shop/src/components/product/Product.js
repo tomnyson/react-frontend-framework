@@ -1,6 +1,5 @@
-
-import React from 'react';
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
 const SPost = styled.div`
   display: flex;
@@ -18,8 +17,7 @@ const SWrapperContent = styled.div`
   h3 {
     margin: 0;
   }
-  
-` 
+`
 const SReadMore = styled.a`
   text-decoration: none;
   :hover {
@@ -42,24 +40,35 @@ const SButtonIcon = styled.button`
   :last-child {
     color: blue;
   }
-
 `
-const Post = ({picture, name,description, id, createdAt, onRemove, onEdit}) => {
+const Product = ({
+  picture,
+  name,
+  description,
+  id,
+  createdAt,
+  onRemove,
+  onEdit,
+}) => {
   return (
     <SPost>
-      <img alt="" src={picture}/>
-      <SWrapperContent >
+      <img alt="" src={picture} />
+      <SWrapperContent>
         <h3>{name}</h3>
-        <span style={{fontSize: '10px', color: 'gray'}}>{createdAt}</span>
+        <span style={{ fontSize: "10px", color: "gray" }}>{createdAt}</span>
         <p>{description}</p>
         <SReadMore href="#">read more</SReadMore>
       </SWrapperContent>
       <div>
-        <SButtonIcon onClick={()=>onRemove(id)} >remove</SButtonIcon>
-        <SButtonIcon onClick={()=>onEdit({picture, name,description, id, createdAt})}>edit</SButtonIcon>
+        <SButtonIcon onClick={() => onRemove(id)}>remove</SButtonIcon>
+        <SButtonIcon
+          onClick={() => onEdit({ picture, name, description, id, createdAt })}
+        >
+          edit
+        </SButtonIcon>
       </div>
     </SPost>
   )
 }
 
-export default Post
+export default Product

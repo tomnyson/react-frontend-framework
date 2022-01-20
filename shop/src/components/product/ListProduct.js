@@ -1,5 +1,5 @@
 import React from "react"
-import Post from "./Post"
+import Product from "./Product"
 import styled from "styled-components"
 const SWrapper = styled.div`
   display: flex;
@@ -13,7 +13,9 @@ const ListProduct = ({ posts, onRemove, onEdit }) => {
       {posts &&
         posts.length &&
         posts.map((item, index) => {
-          return <Post onRemove={onRemove} onEdit={onEdit} key={index} {...item} />
+          return (
+            <Product onRemove={onRemove} onEdit={onEdit} key={index} {...item} />
+          )
         })}
     </SWrapper>
   )

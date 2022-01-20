@@ -13,7 +13,7 @@ export const addToDo = (payload) => {
 }
 
 export const fetchingProductList = (payload) => {
-  console.log("aaaa", payload)
+  console.log("fetchingProductList", payload)
   return { type: actions.PRODUCT_LIST_FETCHING }
 }
 
