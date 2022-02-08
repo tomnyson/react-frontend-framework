@@ -12,6 +12,7 @@ import { authReducer, todoReducer, productReducer } from "../reducer"
 import { combineReducers } from "../utils/funtions"
 import { initialState } from "../reducer/action"
 import PublicRouter from "./public.route"
+import PrivateRouter from "./private.route"
 import { ThemeProvider } from "@mui/system"
 import { createTheme } from "@mui/material/styles"
 import { green, purple, white } from "@mui/material/colors"
@@ -72,15 +73,31 @@ const RouterScreen = () => {
 
   const privatePath = [
     {
-      path: "/",
+      path: "/admin/",
       page: <PostScreen />,
     },
     {
-      path: "/posts",
+      path: "/admin/categories",
       page: <PostScreen />,
     },
     {
-      path: "/post:id",
+      path: "/admin/products",
+      page: <PostDetailScreen />,
+    },
+    {
+      path: "/admin/config",
+      page: <PostDetailScreen />,
+    },
+    {
+      path: "/admin/slider",
+      page: <PostDetailScreen />,
+    },
+    {
+      path: "/admin/order",
+      page: <PostDetailScreen />,
+    },
+    {
+      path: "/admin/users",
       page: <PostDetailScreen />,
     },
   ]
@@ -111,7 +128,7 @@ const RouterScreen = () => {
                   {privatePath.map((route) => (
                     <Route
                       path={route.path}
-                      element={<PublicRouter>{route.page}</PublicRouter>}
+                      element={<PrivateRouter>{route.page}</PrivateRouter>}
                     />
                   ))}
                   <Route path="*" element={<h1>page not found</h1>} />

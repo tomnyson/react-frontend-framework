@@ -1,6 +1,6 @@
-import Grid from "@mui/material/Grid"
-
-const PrivateRouter = ({ children }) => {
-  return <Grid></Grid>
+import LayoutDashboard from "../components/layout/LayoutDashboard"
+const PublicRouter = ({ children }) => {
+  return <LayoutDashboard>{children}</LayoutDashboard>
 }
-export default PrivateRouter
+
+export default PublicRouter

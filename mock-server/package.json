@@ -6,14 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db": "json-server --watch ./db/db.json",
-    "dev": "nodemon --watch --exec babel-node ./src/app.js",
+    "dev": "nodemon --experimental-modules --es-module-specifier-resolution=node --exec babel-node ./src/app.js",
     "build": "rimraf dist && babel src --out-dir dist  --copy-files"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "json-server": "^0.17.0",
-    "mongoose": "^6.1.7"
+    "mongoose": "^6.1.7",
+    "multer": "^1.4.4",
+    "sharp": "^0.30.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.8",
