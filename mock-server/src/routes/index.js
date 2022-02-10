@@ -3,9 +3,13 @@ import TagSchema from '../schemas/tagSchema'
 import CategorySchema from '../schemas/categorySchema'
 import PostSchema from '../schemas/postSchema'
 import sliderRoutes from './slider.route'
+import userRoutes from './user.route'
+
 const apiRoutes = express.Router()
 
 apiRoutes.use('/slider', sliderRoutes)
+apiRoutes.use('/user', userRoutes)
+
 apiRoutes.get('/', (req, res) => {
   return res.json({ message: 'hello' })
 })
