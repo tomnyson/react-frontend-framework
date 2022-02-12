@@ -5,16 +5,22 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch index.js"
+    "dev": "nodemon --watch --experimental-modules --es-module-specifier-resolution=node --exec babel-node index.js"
   },
   "author": "tomnyson",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongoose": "^6.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "dotenv": "^16.0.0",
     "nodemon": "^2.0.15"
   }
 }
