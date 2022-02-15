@@ -23,7 +23,6 @@ module.exports = {
         .populate('items.product', '_id name image price')
       return res.json(data)
     } catch (error) {
-      throw error
       return res.status(500).json({ message: 'server error' })
     }
   },

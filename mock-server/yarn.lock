@@ -30,28 +30,7 @@
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.16.8.tgz#31560f9f29fdf1868de8cb55049538a1b9732a60"
   integrity sha512-m7OkX0IdKLKPpBlJtF561YJal5y/jyI5fNfWbPxh2D/nbzzGI4qRyrD8xO2jB24u7l+5I2a43scCG2IrfjC50Q==
 
-"@babel/core@^7.16.7":
-  version "7.16.7"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.16.7.tgz#db990f931f6d40cb9b87a0dc7d2adc749f1dcbcf"
-  integrity sha512-aeLaqcqThRNZYmbMqtulsetOQZ/5gbR/dWruUCJcpas4Qoyy+QeagfDsPdMrqwsPRDNxJvBlRiZxxX7THO7qtA==
-  dependencies:
-    "@babel/code-frame" "^7.16.7"
-    "@babel/generator" "^7.16.7"
-    "@babel/helper-compilation-targets" "^7.16.7"
-    "@babel/helper-module-transforms" "^7.16.7"
-    "@babel/helpers" "^7.16.7"
-    "@babel/parser" "^7.16.7"
-    "@babel/template" "^7.16.7"
-    "@babel/traverse" "^7.16.7"
-    "@babel/types" "^7.16.7"
-    convert-source-map "^1.7.0"
-    debug "^4.1.0"
-    gensync "^1.0.0-beta.2"
-    json5 "^2.1.2"
-    semver "^6.3.0"
-    source-map "^0.5.0"
-
-"@babel/generator@^7.16.7", "@babel/generator@^7.16.8":
+"@babel/generator@^7.16.8":
   version "7.16.8"
   resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.16.8.tgz#359d44d966b8cd059d543250ce79596f792f2ebe"
   integrity sha512-1ojZwE9+lOXzcWdWmO6TbUzDfqLD39CmEhN8+2cX9XkDo5yW1OpgfejfliysR2AWLpMamTiOiAp/mtroaymhpw==
@@ -257,15 +236,6 @@
     "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.16.8"
     "@babel/types" "^7.16.8"
-
-"@babel/helpers@^7.16.7":
-  version "7.16.7"
-  resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.16.7.tgz#7e3504d708d50344112767c3542fc5e357fffefc"
-  integrity sha512-9ZDoqtfY7AuEOt3cxchfii6C7GDyyMBffktR5B2jvWv8u2+efwvpnVKXMWzNehqy68tKgAfSwfdw/lWpthS2bw==
-  dependencies:
-    "@babel/template" "^7.16.7"
-    "@babel/traverse" "^7.16.7"
-    "@babel/types" "^7.16.7"
 
 "@babel/highlight@^7.16.7":
   version "7.16.7"
@@ -1096,6 +1066,11 @@ array-flatten@1.1.1:
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
   integrity sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=
 
+babel-core@7.0.0-bridge.0:
+  version "7.0.0-bridge.0"
+  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
+  integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
+
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.3.3.tgz#84fda19c976ec5c6defef57f9427b3def66e17a3"
@@ -1494,7 +1469,7 @@ content-type@~1.0.4:
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
-convert-source-map@^1.1.0, convert-source-map@^1.7.0:
+convert-source-map@^1.1.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.8.0.tgz#f3373c32d21b4d780dd8004514684fb791ca4369"
   integrity sha512-+OQdjP49zViI/6i7nIJpA8rAl4sV/JdPfU9nZs3VqOwGIgizICvuN2ru6fMd+4llL0tar18UYJXfZ/TWtmhUjA==
@@ -2079,11 +2054,6 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
-gensync@^1.0.0-beta.2:
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.2.tgz#32a6ee76c3d7f52d46b2b1ae5d93fea8580a25e0"
-  integrity sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==
-
 get-caller-file@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
@@ -2608,13 +2578,6 @@ json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
-
-json5@^2.1.2:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.0.tgz#2dfefe720c6ba525d9ebd909950f0515316c89a3"
-  integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
-  dependencies:
-    minimist "^1.2.5"
 
 jsonwebtoken@^8.2.0, jsonwebtoken@^8.5.1:
   version "8.5.1"
