@@ -1,5 +1,6 @@
-import express from 'express'
-import userRoutes from './user.route'
+const express = require('express')
+const userRoutes =  require('./user.route')
+const categoryRoutes = require('./categories.route')
 
 const apiRoute = express.Router()
 /**
@@ -7,8 +8,8 @@ const apiRoute = express.Router()
  * 
  */
  apiRoute.use('/user', userRoutes)
-//  apiRoute.use('/categories', userRoutes)
+ apiRoute.use('/categories', categoryRoutes)
 //  apiRoute.use('/products', userRoutes)
 //  apiRoute.use('/orders', userRoutes)
 
- export default apiRoute
+module.exports = apiRoute

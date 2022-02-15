@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 require('dotenv').config()
 
 const DB_LOCAL = `mongodb://localhost:27017/db-shopping`

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch --experimental-modules --es-module-specifier-resolution=node --exec babel-node index.js"
+    "dev": "nodemon --watch index.js"
   },
   "author": "tomnyson",
   "license": "ISC",

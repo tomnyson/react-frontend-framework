@@ -1,4 +1,4 @@
-import UserModel from '../models/user.schema'
+const UserModel = require('../models/user.schema')
 module.exports = {
   register: (req, res, next) => {
     // thêm user vào

@@ -2,8 +2,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 // import api router
-import apiRoute from './routes'
-import mongoDbProvider from './models/mongodbProvider'
+const apiRoute =  require('./routes')
+const mongoDbProvider = require('./models/mongodbProvider')
 const app = express()
 require('dotenv').config()
 

@@ -1,5 +1,5 @@
-import express from 'express'
-import {register} from '../controllers/user.controller'
+const express = require('express')
+const {register} = require('../controllers/user.controller')
 
 const userRoute = express.Router()
 /**
@@ -28,4 +28,4 @@ userRoute.delete('/:id', (req, res, next) => {
 })
 
 
-export default userRoute
+module.exports = userRoute
