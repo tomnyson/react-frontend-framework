@@ -14,10 +14,26 @@ module.exports = {
   },
   getList: async (req, res, next) => {
     try {
-      const data = await ProductSchema.find().populate('category', '-__v')
-      return res.json(data)
+      /**
+       * lấy theo keyword
+       * mặc định số trang sẽ là 10 item và page=1 lần
+       */
+      const { keyword, limit = 2, page = 1 } = req.query
+      const conditions = {}
+      if (keyword) {
+        conditions.name = { $regex: '.*' + keyword + '.*' }
+      }
+      const data = await ProductSchema.find(conditions)
+        .populate('category', '-__v')
+        .skip((page - 1) * limit)
+        .limit(limit)
+        .sort({ createAt: -1 })
+      const total = await ProductSchema.count(conditions)
+      return res.json({
+        data: data,
+        totalPage: Math.floor(total / limit),
+      })
     } catch (error) {
-      throw error
       return res.status(500).json({ message: 'server error' })
     }
   },

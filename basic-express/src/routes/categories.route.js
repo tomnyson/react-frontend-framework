@@ -1,5 +1,5 @@
 const express = require('express')
-const {create} = require('../controllers/category.controller')
+const {create, getList, getDetail, update, remove } = require('../controllers/category.controller')
 
 const categoryRoute = express.Router()
 /**
@@ -8,11 +8,11 @@ const categoryRoute = express.Router()
  */
 
 categoryRoute.get('/', (req, res, next) => {
-  return res.json({message: 'user route'})
+  getList(req, res, next)
 })
 
 categoryRoute.get('/:id', (req, res, next) => {
-
+  getDetail(req, res, next )
 })
 // router đăng ký
 categoryRoute.post('/', (req, res, next) => {
@@ -20,11 +20,11 @@ categoryRoute.post('/', (req, res, next) => {
 })
 
 categoryRoute.put('/:id', (req, res, next) => {
-
+  update(req, res, next)
 })
 
 categoryRoute.delete('/:id', (req, res, next) => {
-
+  remove(req, res, next)
 })
 
 

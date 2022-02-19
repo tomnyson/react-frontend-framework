@@ -1,6 +1,6 @@
 const express = require('express')
-const {register} = require('../controllers/user.controller')
-
+const {register, login, getList} = require('../controllers/user.controller')
+const {createUserValidation, validate } = require('../utils/schemaValidation')
 const userRoute = express.Router()
 /**
  *  chia nhỏ route con ra
@@ -8,15 +8,19 @@ const userRoute = express.Router()
  */
 
 userRoute.get('/', (req, res, next) => {
-  return res.json({message: 'user route'})
+  getList(req, res, next)
 })
 
 userRoute.get('/:id', (req, res, next) => {
 
 })
 // router đăng ký
-userRoute.post('/register', (req, res, next) => {
+userRoute.post('/register',validate(createUserValidation), (req, res, next) => {
   register(req, res, next)
+})
+
+userRoute.post('/login', (req, res, next) => {
+  login(req, res, next)
 })
 
 userRoute.put('/:id', (req, res, next) => {

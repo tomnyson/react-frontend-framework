@@ -6,16 +6,17 @@ import PostScreen from "../pages/PostScreen"
 import PostDetailScreen from "../pages/PostDetailScreen"
 import { ThemeContext } from "../context/themeContext"
 import GlobalProvider from "../context/globalProvider"
-import AddTodo from "../components/todo/AddToDo"
-import ToDoList from "../components/todo/ToDoList"
-import { authReducer, todoReducer, productReducer } from "../reducer"
-import { combineReducers } from "../utils/funtions"
+import { authReducer, todoReducer, productReducer, alertReducer } from "../reducer"
+import { combineReducers } from "../utils/functions"
 import { initialState } from "../reducer/action"
 import PublicRouter from "./public.route"
 import PrivateRouter from "./private.route"
 import { ThemeProvider } from "@mui/system"
 import { createTheme } from "@mui/material/styles"
 import { green, purple, white } from "@mui/material/colors"
+import LoginScreen from "../pages/LoginScreen"
+import UserScreen from "../pages/UserScreen"
+import CategoryScreen from "../pages/CategoryScreen"
 import ProductScreen from "../pages/ProductScreen"
 
 const theme = createTheme({
@@ -48,6 +49,7 @@ const rootReducer = combineReducers({
   ath: authReducer,
   todo: todoReducer,
   product: productReducer,
+  alert: alertReducer,
 })
 const RouterScreen = () => {
   const [value, setValue] = useState(initTheme)
@@ -69,6 +71,10 @@ const RouterScreen = () => {
       path: "/products",
       page: <ProductScreen />,
     },
+    {
+      path: "/login",
+      page: <LoginScreen />,
+    },
   ]
 
   const privatePath = [
@@ -77,12 +83,16 @@ const RouterScreen = () => {
       page: <PostScreen />,
     },
     {
+      path: "/admin/users",
+      page: <UserScreen />,
+    },
+    {
       path: "/admin/categories",
-      page: <PostScreen />,
+      page: <CategoryScreen />,
     },
     {
       path: "/admin/products",
-      page: <PostDetailScreen />,
+      page: <ProductScreen />,
     },
     {
       path: "/admin/config",
@@ -121,12 +131,14 @@ const RouterScreen = () => {
                 <Routes>
                   {publicPath.map((route) => (
                     <Route
+                      exact
                       path={route.path}
                       element={<PublicRouter>{route.page}</PublicRouter>}
                     />
                   ))}
                   {privatePath.map((route) => (
                     <Route
+                      exact
                       path={route.path}
                       element={<PrivateRouter>{route.page}</PrivateRouter>}
                     />

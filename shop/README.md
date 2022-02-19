@@ -1,217 +1,70 @@
-import React from 'react';
-import {BrowserRouter as Router,  Routes,  Route} from 'react-router-dom'
-import DemoMeterial from '../pages/DemoMeterial'
-import PostScreen from '../pages/PostScreen'
-import PostDetailScreen from '../pages/PostDetailScreen'
-import Grid from '@mui/material/Grid'
+### tích hợp api cho chức website
 
-const RouterScreen = () => {
-    return (
-      <Router>
-      <Grid container spacing={2} sx={{margin: '0 auto'}}>
-      <Grid item md={12}>
-          <Routes>
-            <Route path="/post" element={<PostScreen/>}/>
-            <Route path="/post/:id" element={<PostDetailScreen/>}/>
-            <Route path="/" element={<DemoMeterial/>}/>
-          </Routes>
-      </Grid>
-        
-      </Grid>
-      </Router>
-    )
-}
+website sẽ ra 3 loại người dùng
 
-export default RouterScreen
+- guest: không đăng nhập website
 
+* đã đăng nhập
 
+- user ( có thể mua hàng)
+- admin (toàn quyền của hệ thống)
 
-import React, {useState, useEffect}  from 'react';
-import axios from 'axios';
-import ListPost from '../components/post-new/ListPost'
-import CreatePost from '../components/post-new/CreatePost'
-import UpdatePost from '../components/post-new/UpdatePost'
-import styled from 'styled-components'
+### tạo chức năng login
 
-function PostScreen() {
-  //useState khai báo đây là state( state có nghỉa là một biến có thể thay đổi trong quá trình chạy)
-  // trạng thái của component
-  /**
-   * b1: tên biến , vd: name  => setName
-   *  định nghĩa một hàm để setSate default: LE HONG SOn
-   *  nếu muốn xài mặc định thì bỏ dữ liệu vào useSate()
-   * để dùng đơn giản chỉ cần gọi tên liệu
-   * cần cập nhật gọi hàm set ở trên
-   * variable : nhập bất kỳ thứ gì: kiểu dữ liệu cơ bản string, number, boolean
-   *  kiểu nâng cao: object
-   */
-  const [name, setName] = useState('Le Hong Son')
-  const [mssv, setMssv] = useState('')
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [isFetchData, setIsFetchData] = useState(false)
-  const [isCreate, setIsCreate] = useState(false)
+- create form login
+- user/password -> login
+  save token login tại localstorage
+  gửi kèm token nếu đã có token trong axios
 
-  const [selectedPost, setSelectedPost] = useState(undefined)
+  - với các path private thì yêu cầu login để sử dụng
 
-   useEffect(()=> {
-    fetchAPI()
-  },[isFetchData])
+  * tiến hàng import login Screen comp to route
 
-  const fetchAPI= async () => {
-    const response = await axios.get('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article');
-    // check dữ dữ liệu trước khi lấy
-    if(response && response.status === 200) {
-      setData(response.data)
-    }
-  }
-  const onCreate = async (post) => {  
-    if(post&&post.id) {
-      // case update
-      const response = await axios.put(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${post.id}`,
-      post
-    ) 
-    console.log('response',response)
-    if(response && response.status === 200) {
-      alert('cập nhật thành công')
-    }
-    } else {
-      const response = await axios.post(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article`,
-      post
-   ) 
-   if(response && response.status === 201) {
-     alert('tạo thành công')
-   }
-    }
-    setIsCreate(false)
-    setIsFetchData(!isFetchData)
-  }
+  - create login flow
+    - tạo hàm login
+    - call api login
 
-  const onEdit = async(post) => {
-    setSelectedPost(post)
-  }
-  
-  const onChangeName = (event) => {
-    setName(event.target.value)
-  }
+  * khi login thành công chúng ta tiến hành xử phần reducer
+    chúng ta cần lấy thêm thông tin roleId và name để hiển thị UI
 
-  const onSubmit = async (data) => {
-    // POST
-    const response = await axios.post('https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article', data)
-    if(response && response.status === 201) {
-      alert('create thành công')
-      fetchAPI()
-    }
-  }
+### yêu cầu login cho các page private như thế nào ?
 
-  const onSubmitEdit = async (data) => {
-    const response = await axios.put(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${data.id}`, data)
-    if(response && response.status === 200) {
-      alert('cập nhật thành công')
-      setSelectedPost(undefined)
-      fetchAPI()
-    }
-  }
+chúng ta sẽ check quyền và token để xác định user login hay chưa
 
-  const onRemove = async (id) => {
-   const response = await axios.delete(`https://61a5e3c48395690017be8ed2.mockapi.io/blogs/article/${id}`)
-    if(response && response.status === 200) {
-      alert('xoá thành công')
-      // load lại list
-      fetchAPI()
-    }
-  }
+### tạo quản lý user(chỉ có login mới xem đươc)
 
-  return (
-          <>
-              <CreatePost onSubmit={onSubmit}/>
-              {selectedPost && <UpdatePost item={selectedPost} onSubmit={onSubmitEdit}/>}
-              <ListPost onRemove={onRemove} onEdit={onEdit} posts={data}/>
-            </>
-        );
-}
-const SButton = styled.button`
-  background: green;
-  color: #ffff;
-  padding: 10px;
-  width: 150px;
-`
-const SSearchInput = styled.input`
-  padding: 10px;
-  width: 300px;
-  margin-bottom: 20px;
-`
-const Scontainer = styled.div `
-  max-width: 1240px;
-  margin: 0 auto;
-`
-export default PostScreen;
+- trang danh sách ( get list user from api)
+  bổ sung thêm header cho axios để get được các private router
+  thêm thuộc tính header
 
+* tạo một table và đổ dữ liệu từ api vào list
 
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getAPI } from '../utils/api';
-import { API } from '../utils/const';
-import styled from 'styled-components';
-import Grid from '@mui/material/Grid';
+- thêm mới
+  chúng ta sẽ tạo một form (cho phép user nhập vào username, password, role để tạo một user mới và hiện thị lại list)
+  - để validation chúng ta dùng form hook
+- cập nhật
+  - lấy thông tin user hiện tại truyền vào modal và thực hiện xoá
+- xoá
 
-function PostDetailScreen() {
-  const [post, setPost] = useState(null);
-  const { id } = useParams();
+### xây dựng một alert funtion giúp nhận thông báo từ server cho người dùng
 
-  useEffect(async () => {
-    if (id) {
-      const url = API + `/${id}`;
-      const response = await getAPI(url);
-      if (response) {
-        setPost(response);
-      }
-    }
-  }, [id]);
+### create reducer là notification
 
-  if (!post) {
-    return <h1>Loading</h1>;
-  }
-  const { name, description, picture, createdAt } = post;
-  return (
-    <Grid>
-      <SPost>
-        <img alt="" src={picture} />
-        <SWrapperContent>
-          <h3>{name}</h3>
-          <span style={{ fontSize: '10px', color: 'gray' }}>{createdAt}</span>
-          <p>{description}</p>
-          <SReadMore href="#">read more</SReadMore>
-        </SWrapperContent>
-        <div></div>
-      </SPost>
-    </Grid>
-  );
-}
+# nhúng alert bên ngoài layout
 
-const SPost = styled.div`
-  display: flex;
-  width: 49%;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  img {
-    width: 300px;
-    object-fit: contain;
-  }
-`;
-const SWrapperContent = styled.div`
-  text-align: left;
-  padding-left: 20px;
-  h3 {
-    margin: 0;
-  }
-`;
-const SReadMore = styled.a`
-  text-decoration: none;
-  :hover {
-    text-decoration: underline;
-    color: red;
-  }
-`;
+chúng ta sẽ chạy một timeout để hide alert trong khoảng 1s
 
-export default PostDetailScreen;
+# CRUD product
+
+- get list
+  support tính năng search và tính năng pagination
+  search thì chúng ta cần truyền keyword lên
+  phân trang: cần có số trang trả về, và gửi số tran cần lấy lên
+  thay đổi code của product get list một xíu
+- create
+- put
+- delete
+
+product sẽ cài một ckeditor support việc viết mô tả cho sản phẩm
+
+<!-- https://express-validator.github.io/docs/index.html -->

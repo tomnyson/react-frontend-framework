@@ -10,10 +10,7 @@ const LayoutPublic = ({ children }) => {
       <Grid xs={12} item>
         <Header />
       </Grid>
-      <Container>
-        <SliderHome />
-        {children}
-      </Container>
+      <Container>{children}</Container>
       <Grid xs={12} item>
         <Footer />
       </Grid>

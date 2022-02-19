@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^32.0.0",
+    "@ckeditor/ckeditor5-react": "^4.0.0",
+    "@ckeditor/ckeditor5-upload": "^32.0.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.7",
@@ -12,9 +15,11 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.24.0",
     "json-server": "^0.17.0",
+    "jsonwebtoken": "^8.5.1",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.27.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "react-slick": "^0.28.1",
@@ -55,5 +60,7 @@
     "eslint": "^8.6.0",
     "eslint-plugin-react": "^7.28.0",
     "use-reducer-logger": "^1.0.2"
-  }
+  },
+  "proxy": "http://localhost:8000",
+  "browser": {}
 }

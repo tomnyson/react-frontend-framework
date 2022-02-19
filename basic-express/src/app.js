@@ -23,6 +23,9 @@ let listSinhVien = [{
   mark: 7.5,
   class: 'it-01'
 },
+
+
+
 {
   id: 2,
   name: 'nguyen van b',

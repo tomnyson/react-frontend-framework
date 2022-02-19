@@ -131,3 +131,7 @@ delete
   - create
   - put
   - delete
+
+### giờ đến categories
+
+chúng ta đã xây dựng ở user bây giờ chỉ việc copy lại thôi

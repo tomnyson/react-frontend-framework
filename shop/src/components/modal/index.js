@@ -1,0 +1,40 @@
+import * as React from "react"
+import Box from "@mui/material/Box"
+import Typography from "@mui/material/Typography"
+import Modal from "@mui/material/Modal"
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "50%",
+  maxHeight: "80%",
+  overflow: "scroll",
+  background: "#fff",
+  boxShadow: 10,
+  p: 4,
+}
+
+export default function ModalScreen({ isOpen, closeModal, title, children }) {
+  const [open, setOpen] = React.useState(false)
+  return (
+    <div>
+      <Modal
+        open={isOpen || open}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography ml={"10px"} id="modal-modal-title" variant="h6" component="h2">
+            {title}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <Box>{children}</Box>
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  )
+}
