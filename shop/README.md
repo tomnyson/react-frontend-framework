@@ -68,3 +68,7 @@ chúng ta sẽ chạy một timeout để hide alert trong khoảng 1s
 product sẽ cài một ckeditor support việc viết mô tả cho sản phẩm
 
 <!-- https://express-validator.github.io/docs/index.html -->
+
+### xây dựngg chứcc năngg logout cơ bản
+
+khi nắn vào button logout thì sẽ xoá localstorage, đẩy về trang login

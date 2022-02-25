@@ -15,7 +15,15 @@ module.exports = {
   },
   getList: async (req, res, next) => {
     try {
-      const data = await ProductModel.find().populate('category', '-__v')
+      const { keyword, categoryList, limit = 2, page = 1 } = req.query
+      const conditions = {}
+      if (keyword) {
+        conditions.name = { $regex: '.*' + keyword + '.*' }
+      }
+      if(categoryList) {
+        conditions.category = { $in : categoryList.split(',')  }
+      }
+      const data = await ProductModel.find(conditions).populate('category', '-__v')
       return res.json(data)
     } catch (error) {
       throw error

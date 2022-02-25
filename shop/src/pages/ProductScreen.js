@@ -98,9 +98,9 @@ const ProductScreen = () => {
                     <td>{product.name}</td>
                     <td style={{ textAlign: "center" }}>
                       {removeTags(
-                        product.description.length <= 200
-                          ? product.description
-                          : product.description.substring(0, 200) + "..."
+                        product?.description?.length <= 200
+                          ? product?.description
+                          : product?.description?.substring(0, 200) + "..."
                       )}
                     </td>
                     <td>{formatCurrency(product.price)}</td>

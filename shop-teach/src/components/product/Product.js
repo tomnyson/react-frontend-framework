@@ -5,8 +5,9 @@ import { Link } from "react-router-dom"
 import { Button } from "@mui/material"
 import { useGlobalContext } from "../../context/globalContext"
 import { addCart } from "../../store/actions"
+import styled from "@emotion/styled"
 
-const Product = ({ image, category, price, title, description, id, createdAt }) => {
+const Product = ({ name, description, price, images, _id }) => {
   const [state, dispatch] = useGlobalContext()
   return (
     <Box>
@@ -16,9 +17,9 @@ const Product = ({ image, category, price, title, description, id, createdAt }) 
           width: "100%",
         }}
         alt=""
-        src={image}
+        src={images.length > 0 ? images[0] : "https://via.placeholder.com/300"}
       />
-      <h3>{title}</h3>
+      <SLink to={`/product/${_id}`}>{name}</SLink>
       <Box
         component="span"
         sx={{
@@ -28,22 +29,26 @@ const Product = ({ image, category, price, title, description, id, createdAt }) 
           marginBottom: "10px",
         }}
       >
-        category: {category}
+        {/* category: {category} */}
       </Box>
       <Box component="span" sx={{ color: "red", fontSize: "18px" }}>
         {price}
       </Box>
-      <p>{description && description.substring(0, 100)}...</p>
-      <Link to={`/product/${id}`}>View Detail</Link>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: description && description.substring(0, 100),
+        }}
+      ></div>
       <Button
         sx={{ display: "block", marginTop: "10px", width: "200px" }}
         variant="contained"
         onClick={() => {
           dispatch(
             addCart({
-              id,
-              title,
-              image,
+              id: _id,
+              name,
+              description,
+              price,
               quantity: 1,
             })
           )
@@ -55,4 +60,12 @@ const Product = ({ image, category, price, title, description, id, createdAt }) 
   )
 }
 
+const SLink = styled(Link)`
+  &:hover {
+    color: #1976d2;
+  }
+  font-size: 20px;
+  color: #000;
+  text-decoration: none;
+`
 export default Product

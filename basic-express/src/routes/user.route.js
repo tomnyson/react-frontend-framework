@@ -2,6 +2,7 @@ const express = require('express')
 const {register, login, getList} = require('../controllers/user.controller')
 const {createUserValidation, validate } = require('../utils/schemaValidation')
 const userRoute = express.Router()
+
 /**
  *  chia nhỏ route con ra
  * 
@@ -10,7 +11,8 @@ const userRoute = express.Router()
 userRoute.get('/', (req, res, next) => {
   getList(req, res, next)
 })
-
+userRoute.get('/test-email', (req, res, next) => {
+})
 userRoute.get('/:id', (req, res, next) => {
 
 })

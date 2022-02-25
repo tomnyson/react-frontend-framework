@@ -3,14 +3,14 @@ import Container from "@mui/material/Container"
 
 const Header = ({ children }) => {
   return (
-    <Grid container>
-      <Container>
-        <Grid display="flex" justify="spacing-between" container>
-          <Grid xs={8}>Logo</Grid>
-          <Grid xs={4}>Cart</Grid>
+    <Container>
+      <Grid display="flex" justify="spacing-between" container>
+        <Grid xs={8}>
+          <h1>SHOPPING SELL</h1>
         </Grid>
-      </Container>
-    </Grid>
+        <Grid xs={4}>Cart</Grid>
+      </Grid>
+    </Container>
   )
 }
 

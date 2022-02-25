@@ -6,7 +6,7 @@ const apiRoute =  require('./routes')
 const mongoDbProvider = require('./models/mongodbProvider')
 const app = express()
 require('dotenv').config()
-
+const cors = require('cors')
 const port = 8081
 /**
  *  gửi tên, tuôỉ
@@ -14,6 +14,7 @@ const port = 8081
  */
 
 app.use(bodyParser.json())
+app.use(cors())
 //  sử dung router
 app.use('/api', apiRoute)
 

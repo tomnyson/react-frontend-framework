@@ -1,7 +1,14 @@
 import axios from "axios"
 
-export const getAPI = async (url) => {
-  const response = await axios.get(url).catch((err) => console.error(err))
+export const getAPI = async (url, payload = {}) => {
+  /**
+   * create query string
+   */
+  const qs = Object.keys(payload)
+    .map((key) => `${key}=${payload[key]}`)
+    .join("&")
+
+  const response = await axios.get(`${url}?${qs}`).catch((err) => console.error(err))
   if (response && response.status === 200) {
     return response.data
   }

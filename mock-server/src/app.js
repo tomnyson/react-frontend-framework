@@ -6,9 +6,10 @@ import cors from 'cors'
 const passport = require('passport')
 import strategy from './middleware/auth.middleware'
 const app = express()
-
+const pug = require('pug')
 passport.use(strategy)
 app.use(passport.initialize())
+app.set('view engine', 'pug')
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static('public'))

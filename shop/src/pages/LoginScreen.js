@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
@@ -11,7 +11,15 @@ const LoginScreen = () => {
   const [username, setUserName] = useState("")
   const [password, setPassword] = useState("")
   const [state, dispatch] = useGlobalContext()
+  const { token } = state.auth
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token || localStorage.getItem("TOKEN")) {
+      navigate("/admin")
+    }
+  }, [])
 
   const handleLogin = async () => {
     if (username !== "" && password !== "") {

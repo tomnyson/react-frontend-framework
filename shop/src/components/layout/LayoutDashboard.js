@@ -8,10 +8,15 @@ import Alert from "@mui/material/Alert"
 import Stack from "@mui/material/Stack"
 import { useGlobalContext } from "../../context/globalContext"
 import { clearAlert } from "../../reducer/action"
+import LogoutIcon from "@mui/icons-material/Logout"
+import IconButton from "@mui/material/IconButton"
+import { useNavigate } from "react-router-dom"
+
 const LayoutDashBoard = ({ children }) => {
   const location = useLocation()
   const [state, dispatch] = useGlobalContext()
   const { message, type } = state.alert
+  const navigate = useNavigate()
   const menus = [
     {
       name: "categories",
@@ -34,11 +39,31 @@ const LayoutDashBoard = ({ children }) => {
       }, 2000)
     }
   }, [message])
+
+  const onLogout = () => {
+    /**
+     * clear localstorage
+     * redirect to login pages
+     */
+    localStorage.removeItem("TOKEN")
+    localStorage.removeItem("User")
+    alert("logout success")
+    navigate("/login")
+  }
   return (
     <Grid container>
       <Container>
-        <Grid item xs={12}>
+        <Grid
+          width="100%"
+          display="flex"
+          justifyContent="space-between"
+          item
+          xs={12}
+        >
           <h3>admin dashboard</h3>
+          <IconButton onClick={onLogout} aria-label="delete">
+            <LogoutIcon /> logout
+          </IconButton>
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={2}>

@@ -12,6 +12,8 @@ import { green, purple, white } from "@mui/material/colors"
 import PublicLayout from "../components/layout/LayoutPublic"
 import { initialState } from "../store/initialState"
 import { cartReducer } from "../store/reducers"
+import ProductDetailScreen from "../pages/ProductDetailScreen"
+
 const initTheme = {
   background: "#fff",
   color: "#fff",
@@ -44,7 +46,22 @@ const RouterScreen = () => {
                     </PublicLayout>
                   }
                 />
-                <Route path="/products" element={<ProductScreen />} />
+                <Route
+                  path="/products"
+                  element={
+                    <PublicLayout>
+                      <ProductScreen />
+                    </PublicLayout>
+                  }
+                />
+                <Route
+                  path="/product/:id"
+                  element={
+                    <PublicLayout>
+                      <ProductDetailScreen />
+                    </PublicLayout>
+                  }
+                />
                 <Route path="/posts" element={<PostScreen />} />
                 <Route path="*" element={<h1>page not found</h1>} />
               </Routes>
