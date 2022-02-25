@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom"
 import Button from "@mui/material/Button"
 
 const ProductDetailScreen = () => {
-  const [product, setProduct] = useState([])
+  const [product, setProduct] = useState(null)
   // const { value, setValue } = useContext(ThemeContext)
   const { id } = useParams()
   useEffect(() => {
@@ -21,29 +21,32 @@ const ProductDetailScreen = () => {
       setProduct(result)
     }
   }
-  if (product) {
-    return (
-      <Grid container>
-        <Grid item xs={4}>
-          image
-        </Grid>
-        <Grid item xs={8}>
-          <h1>{product.name}</h1>
-          <p>category: {product.category}</p>
-          <p>{product.price}</p>
-          <Button
-            sx={{ display: "block", marginTop: "10px", width: "200px" }}
-            variant="contained"
-          >
-            Buy
-          </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
-        </Grid>
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={4}>
+        {product && product.images && product.images.length > 0 ? (
+          product.images.map((image) => {
+            return <img src={image} height="300px" />
+          })
+        ) : (
+          <img src={"https://via.placeholder.com/300"} />
+        )}
       </Grid>
-    )
-  }
+      <Grid item xs={8}>
+        <h1>{product?.name}</h1>
+        <p style={{ color: "red", fontSize: "20px" }}>Price: {product?.price}</p>
+        <Button
+          sx={{ display: "block", marginTop: "10px", width: "200px" }}
+          variant="contained"
+        >
+          Buy
+        </Button>
+      </Grid>
+      <Grid item xs={12}>
+        <div dangerouslySetInnerHTML={{ __html: product?.description }} />
+      </Grid>
+    </Grid>
+  )
 }
 
 export default ProductDetailScreen

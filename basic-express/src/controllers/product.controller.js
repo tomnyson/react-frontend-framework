@@ -13,18 +13,33 @@ module.exports = {
     const isCreated = await newProduct.save()
     return res.json(isCreated);
   },
+  /**
+   * limit: number product in a page
+   * total: số item thoả thảo đk
+   *  page: trang api cần hiển thị
+   */
   getList: async (req, res, next) => {
     try {
-      const { keyword, categoryList, limit = 2, page = 1 } = req.query
+      const { keyword, categoryList, limit = 10, page = 1 } = req.query
       const conditions = {}
+
       if (keyword) {
         conditions.name = { $regex: '.*' + keyword + '.*' }
       }
+
       if(categoryList) {
         conditions.category = { $in : categoryList.split(',')  }
       }
-      const data = await ProductModel.find(conditions).populate('category', '-__v')
-      return res.json(data)
+      const data = await ProductModel.find(conditions)
+      .populate('category', '-__v')
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .sort({ createAt: -1 })
+      const total = await ProductModel.count(conditions)
+      return res.json({
+        data: data,
+        totalPage: Math.floor(total / limit),
+      })
     } catch (error) {
       throw error
     }

@@ -8,13 +8,18 @@ import { useGlobalContext } from "../context/globalContext"
 import CategoryFilter from "../components/catagoryFilter"
 import TextField from "@mui/material/TextField"
 import CircularProgress from "@mui/material/CircularProgress"
+import Pagination from "@mui/material/Pagination"
+
 const ProductScreen = () => {
   const [product, setProduct] = useState([])
   const [categories, setCategories] = useState([])
   const [keyword, setKeyword] = useState("")
   const [category, setCategory] = useState([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [total, setTotal] = useState(0)
   const [state] = useGlobalContext()
+  const limit = 5
 
   useEffect(() => {
     fetchCatagoriesAPI()
@@ -22,15 +27,20 @@ const ProductScreen = () => {
 
   useEffect(() => {
     fetchAPI()
-  }, [keyword, category])
+  }, [keyword, category, page])
 
   const fetchAPI = async () => {
     setLoading(true)
-    const result = await getAPI(API_PRODUCT, { keyword, categoryList: category })
+    const response = await getAPI(API_PRODUCT, {
+      keyword,
+      categoryList: category,
+      limit,
+      page,
+    })
     // check dữ dữ liệu trước khi lấy
-    console.log("result", result)
-    if (result) {
-      setProduct(result)
+    if (response) {
+      setProduct(response?.data)
+      setTotal(response?.totalPage)
       setLoading(false)
     }
   }
@@ -76,9 +86,13 @@ const ProductScreen = () => {
       </table>
     )
   }
-  console.log("category", category)
+
   const handleSearch = (e) => {
     setKeyword(e.target.value)
+  }
+
+  const handleChangePage = (event, value) => {
+    setPage(value)
   }
   return (
     <Grid>
@@ -100,6 +114,14 @@ const ProductScreen = () => {
         </Grid>
         <Grid item xs={10}>
           <ListProduct loading={loading} products={product} />
+          <Grid style={{ display: "flex", justifyContent: "center" }}>
+            <Pagination
+              onChange={handleChangePage}
+              style={{ marginTop: 20 }}
+              count={total}
+              color="primary"
+            />
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

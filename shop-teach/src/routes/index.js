@@ -13,6 +13,7 @@ import PublicLayout from "../components/layout/LayoutPublic"
 import { initialState } from "../store/initialState"
 import { cartReducer } from "../store/reducers"
 import ProductDetailScreen from "../pages/ProductDetailScreen"
+import CartPageScreen from "../pages/CartPageScreen"
 
 const initTheme = {
   background: "#fff",
@@ -59,6 +60,14 @@ const RouterScreen = () => {
                   element={
                     <PublicLayout>
                       <ProductDetailScreen />
+                    </PublicLayout>
+                  }
+                />
+                <Route
+                  path="/carts"
+                  element={
+                    <PublicLayout>
+                      <CartPageScreen />
                     </PublicLayout>
                   }
                 />

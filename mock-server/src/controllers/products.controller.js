@@ -18,7 +18,7 @@ module.exports = {
        * lấy theo keyword
        * mặc định số trang sẽ là 10 item và page=1 lần
        */
-      const { keyword, limit = 2, page = 1 } = req.query
+      const { keyword, limit = 20, page = 1 } = req.query
       const conditions = {}
       if (keyword) {
         conditions.name = { $regex: '.*' + keyword + '.*' }

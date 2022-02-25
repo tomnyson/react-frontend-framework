@@ -19,7 +19,7 @@ const Product = ({ name, description, price, images, _id }) => {
         alt=""
         src={images.length > 0 ? images[0] : "https://via.placeholder.com/300"}
       />
-      <SLink to={`/product/${_id}`}>{name}</SLink>
+      <Link to={`/product/${_id}`}>{name}</Link>
       <Box
         component="span"
         sx={{
