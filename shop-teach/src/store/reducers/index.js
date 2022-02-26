@@ -6,6 +6,7 @@ export const cartReducer = (state, action) => {
       // them moi
       const { id } = action.payload
       const index = state.cart.findIndex((product) => product.id === id)
+      // đã có trong cart state
       if (index !== -1) {
         const cloneCartNew = state.cart.slice()
         const currentItem = cloneCartNew[index]
@@ -16,7 +17,7 @@ export const cartReducer = (state, action) => {
           cart: cloneCartNew,
         }
       }
-      // theme
+      // chưa có => thêm vào
       const cloneCartNew = state.cart.slice()
       cloneCartNew.push(action.payload)
       return {

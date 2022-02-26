@@ -47,8 +47,9 @@ const Product = ({ name, description, price, images, _id }) => {
             addCart({
               id: _id,
               name,
-              description,
               price,
+              image:
+                images.length > 0 ? images[0] : "https://via.placeholder.com/300",
               quantity: 1,
             })
           )

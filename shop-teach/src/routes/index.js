@@ -14,6 +14,8 @@ import { initialState } from "../store/initialState"
 import { cartReducer } from "../store/reducers"
 import ProductDetailScreen from "../pages/ProductDetailScreen"
 import CartPageScreen from "../pages/CartPageScreen"
+import CheckoutPageScreen from "../pages/CheckoutPageScreen"
+import OrderSuccessScreen from "../pages/OrderSuccessScreen"
 
 const initTheme = {
   background: "#fff",
@@ -68,6 +70,22 @@ const RouterScreen = () => {
                   element={
                     <PublicLayout>
                       <CartPageScreen />
+                    </PublicLayout>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <PublicLayout>
+                      <CheckoutPageScreen />
+                    </PublicLayout>
+                  }
+                />
+                <Route
+                  path="/confirm"
+                  element={
+                    <PublicLayout>
+                      <OrderSuccessScreen />
                     </PublicLayout>
                   }
                 />
